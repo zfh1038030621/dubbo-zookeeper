@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+ http://www.springframework.org/schema/context 
+ http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<!--要试用一些@resouce Autowired等注解时要加这句，但如果使用 <context:component-scan/> 后，就可以将 <context:annotation-config/> 移除了。该配置项其实也包含了自动注入上述功能  -->
+	<!-- <context:annotation-config />  -->
+	
+	<!-- 引入属性文件,config.properties位于src/main/resources目录下 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- 自动扫描dao和service包(自动注入) -->
+	<context:component-scan base-package="together.user" />
+	<!-- 数据库 jdbc.properties注入 -->
+
+
+	<import resource="classpath:spring-redis.xml"/>
+	<import resource="classpath:spring-mybatis.xml"/>
+	
+	<!--这里springMVC.xml的配置文件不能与spring混一起，另外要加载
+	 <import resource="classpath:springMVC.xml"/> -->
+	  <import resource="classpath:springMVC.xml"/>
+	  
+</beans>
